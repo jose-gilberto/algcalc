@@ -1,0 +1,36 @@
+header,
+main,
+footer {
+    padding-left: 300px;
+}
+
+.titulo,
+.titulo-modal {
+    margin-bottom: 25px;
+}
+
+.representacao {
+    margin-top: 25px;
+}
+
+.campo-matriz-div {
+    width: 30px;
+    display: inline-block !important;
+    margin: 10px;
+}
+
+.card-content {
+    padding: 0;
+}
+
+#soma {
+    display: none;
+}
+
+@media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
+        padding-left: 0;
+    }
+}

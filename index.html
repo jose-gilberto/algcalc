@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AlgCalc - Álgebra Linear</title>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link type="text/css" rel="stylesheet" href="assets/css/materialize.css"  media="screen,projection"/>
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+		<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+		</script>
+
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+			  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+			});
+		</script>
+	</head>
+	<body>
+		<ul id="slide-out" class="sidenav sidenav-fixed">
+			<li>
+				<div class="user-view">
+					<div class="background teal">
+					</div>
+					<a href="#user">
+					</a>
+					<a>
+						<span class="white-text name">AlgCalc</span>
+					</a>
+					<a>
+						<span class="white-text email">Desenvolvido por José Gilberto.</span>
+					</a>
+				</div>
+			</li>
+			<li>
+				<a class="waves-effect" id="inicioToggle">Inicio</a>
+			</li>
+			<li>
+				<div class="divider"></div>
+			</li>
+			<ul class="collapsible">
+				<li>
+					<div class="collapsible-header"><a class="waves-effect black-text">Matrizes</a></div>
+					<div class="collapsible-body">
+						<ul>
+							<li>
+								<a class="waves-effect teal-text text-lighten-1" id="somaToggle">Soma</a>
+							</li>
+							<li>
+								<a class="waves-effect teal-text text-lighten-1" href="#!">Multiplicação</a>
+							</li>
+							<li>
+								<a class="waves-effect teal-text text-lighten-1" href="#!">Determinantes</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</ul>
+		
+		<main>
+			<div class="row principal">
+				<section id="soma">
+					<div class="col s12 m12">
+    					<div class="card horizontal">
+      						<div class="card-stacked">
+        						<div class="card-content">
+        							<h5 class="titulo">Soma de Matrizes</h5>
+        							<a class="teal lighten-2 waves-effect waves-light btn-small btn modal-trigger" href="#modalSomaMatriz">
+        								Inserir Matriz
+        							</a>
+									<a class="teal lighten-2 waves-effect waves-light btn-small btn modal-trigger" id="calcularSomaMatriz">
+        								Calcular
+        							</a>
+									<a class="teal lighten-2 waves-effect waves-light btn-small btn" id="limparSMatriz">
+        								Limpar Matrizes
+        							</a>
+        							
+        							<div class="representacao row">
+        								<span>Representação:</span>
+        								<div class="col m12">
+        									<div class="card horizontal">
+        										<div class="card-stacked">
+        											<div class="card-content" id="representacaoSoma">
+        											</div>
+        										</div>
+        									</div>
+        								</div>
+        							</div>
+        						</div>
+      						</div>
+    					</div>
+  					</div>
+				</section>
+			</div>	
+		</main>
+
+		<a href="#" data-target="slide-out" class="sidenav-trigger">
+			<i class="material-icons">menu</i>
+		</a>
+
+
+
+		<!-- MODAL INSERIR MATRIZ PARA SOMA -->
+		<div id="modalSomaMatriz" class="modal ">
+		    <div class="modal-content">
+	      		<h4 class="titulo-modal">Inserir Matriz</h4>
+		      	<div class="row">
+					<div class="input-field col m6">
+						<input placeholder="Digite o número de linhas da matriz" id="Slinhas" type="text" class="validate">
+						<label for="Slinhas">Linhas:</label>
+					</div>
+					<div class="input-field col m6">
+						<input placeholder="Digite o número de colunas da matriz" id="Scolunas" type="text" class="validate">
+						<label for="Scolunas">Colunas:</label>
+					</div>
+				</div>
+				<div class="formSMatriz" align="center">
+				</div>
+		    </div>
+		    <div class="modal-footer">
+		      <a id="inserirSMatriz" class="modal-close waves-effect waves-green btn-flat">Inserir</a>
+		    </div>
+	  	</div>
+
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+		<script type="text/javascript" src="assets/js/materialize.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
+	</body>
+</html>
