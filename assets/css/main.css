@@ -41,6 +41,7 @@ footer {
 /*Text color on hover*/
 
 .tabs .tab a.active {
+    background-color: transparent !important;
     color: #26a69a;
 }
 
