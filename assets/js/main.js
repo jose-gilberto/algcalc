@@ -20,6 +20,7 @@ $('#somaToggle').click(function () {
 
 let matrizSoma = {};
 let matrizesSoma = [];
+let matrizResultante = [];
 let valMatrizSoma = [];
 
 $('#limparSMatriz').click(function () {
@@ -44,7 +45,7 @@ function gerarMatrizSoma() {
 	}
 
 	let formulario = '';
-	//formulario += '<div class="input-field campo-matriz"><input placeholder="" id="" type="text" class="validate"></div>'
+
 	for (let i = 0; i < matrizSoma.linhas; i++) {
 
 		for (let j = 0; j < matrizSoma.colunas; j++) {
@@ -78,6 +79,27 @@ $('#inserirSMatriz').click(function () {
 	gerarRepresentacaoSoma();
 });
 
+$('#calcularSomaMatriz').click(function () {
+
+	for (let i = 0; i < matrizSoma.linhas; i++) {
+		let novaLinha = [];
+		for (let j = 0; j < matrizSoma.colunas; j++) {
+			novaLinha.push(0);
+		}
+		matrizResultante.push(novaLinha);
+	}
+
+	for (let n = 0; n < matrizesSoma.length; n++) {
+		for (let i = 0; i < matrizSoma.linhas; i++) {
+			for (let j = 0; j < matrizSoma.colunas; j++) {
+				matrizResultante[i][j] += parseInt(matrizesSoma[n][i][j]);
+			}
+		}
+	}
+
+	gerarRepresentacaoSoma();
+
+});
 
 function gerarRepresentacaoSoma() {
 	if (matrizesSoma.length == 0) {
@@ -111,7 +133,28 @@ function gerarRepresentacaoSoma() {
 				representacao += '=';
 			}
 		}
+
+		if (matrizResultante.length > 0) {
+			representacao += '\\begin{pmatrix}';
+
+			for (let i = 0; i < matrizSoma.linhas; i++) {
+				for (let j = 0; j < matrizSoma.colunas; j++) {
+					representacao += matrizResultante[i][j];
+					if (j != matrizResultante[1].length - 1) {
+						representacao += ' & ';
+					}
+				}
+
+				if (i != matrizResultante.length - 1) {
+					representacao += ' \\\\';
+				}
+			}
+
+			representacao += '\\end{pmatrix}';
+		}
+
 		representacao += ' $$';
+		matrizResultante = [];
 		$('#representacaoSoma').html(representacao);
 		MathJax.Hub.Queue(["Typeset", MathJax.Hub, "representacaoSoma"]);
 	}
