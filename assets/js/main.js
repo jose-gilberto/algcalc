@@ -6,11 +6,19 @@ $(document).ready(function () {
 
 $('#inicioToggle').click(function () {
 	matrizesSoma = [];
+	matrizResultante = [];
 	$('#soma').hide();
+	$('#multiplicacao').hide();
 });
 
 $('#somaToggle').click(function () {
+	$('#multiplicacao').hide();
 	$('#soma').show();
+});
+
+$('#multiplicacaoToggle').click(function () {
+	$('#soma').hide();
+	$('#multiplicacao').show();
 });
 
 /**
