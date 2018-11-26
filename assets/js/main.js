@@ -2,6 +2,7 @@ $(document).ready(function () {
 	$('.tabs').tabs();
 	$('.modal').modal();
 	$('.collapsible').collapsible();
+        $('.sidenav').sidenav();
 });
 
 $('#inicioToggle').click(function () {
