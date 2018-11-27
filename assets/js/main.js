@@ -2,7 +2,11 @@ $(document).ready(function () {
 	$('.tabs').tabs();
 	$('.modal').modal();
 	$('.collapsible').collapsible();
+<<<<<<< HEAD
 	$('.sidenav').sidenav();
+=======
+        $('.sidenav').sidenav();
+>>>>>>> 60cbe666448046ed3b11147b88a70e2e7a263499
 });
 
 $('#inicioToggle').click(function () {
