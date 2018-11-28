@@ -54,7 +54,7 @@
 								<a class="waves-effect teal-text text-lighten-1" id="multiplicacaoToggle">Multiplicação</a>
 							</li>
 							<li>
-								<a class="waves-effect teal-text text-lighten-1" href="#!">Determinantes</a>
+								<a class="waves-effect teal-text text-lighten-1" id="determinanteToggle">Determinantes</a>
 							</li>
 						</ul>
 					</div>
@@ -171,6 +171,71 @@
     					</div>
   					</div>
 				</section>
+				<section id="subtracao">
+					<div class="col s12 m12">
+    					<div class="card horizontal">
+      						<div class="card-stacked">
+        						<div class="card-content">
+        							<h5 class="titulo">Subtração de Matrizes</h5>
+        							<a class="teal lighten-2 waves-effect waves-light btn-small btn modal-trigger" id="inserirMatrizSubtracao" href="#modalSubtracaoMatrizes">
+        								Inserir Matriz
+        							</a>
+									<a class="teal lighten-2 waves-effect waves-light btn-small btn" id="calcularSubtracaoMatriz">
+        								Calcular
+        							</a>
+									<a class="teal lighten-2 waves-effect waves-light btn-small btn" id="limparSubMatriz">
+        								Limpar Matrizes
+        							</a>
+        							
+        							<div class="representacao row">
+        								<span>Representação:</span>
+        								<div class="col m12">
+        									<div class="card horizontal">
+        										<div class="card-stacked">
+        											<div class="card-content" id="representacaoSubtracao">
+        											</div>
+        										</div>
+        									</div>
+        								</div>
+        							</div>
+        						</div>
+      						</div>
+    					</div>
+  					</div>
+				</section>
+				<section id="determinante">
+					<div class="col s12 m12">
+    					<div class="card horizontal">
+      						<div class="card-stacked">
+        						<div class="card-content">
+        							<h5 class="titulo">Determinante de Matrizes</h5>
+        							<a class="teal lighten-2 waves-effect waves-light btn-small btn modal-trigger" id="inserirMatrizDeterminante" href="#modalDeterminanteMatriz">
+        								Inserir Matriz
+        							</a>
+									<a class="teal lighten-2 waves-effect waves-light btn-small btn" id="calcularDeterminanteMatriz">
+        								Calcular
+        							</a>
+									<a class="teal lighten-2 waves-effect waves-light btn-small btn" id="limpartDetMatriz">
+        								Limpar Matrizes
+        							</a>
+        							
+        							<div class="representacao row">
+        								<span>Representação:</span>
+        								<div class="col m12">
+        									<div class="card horizontal">
+        										<div class="card-stacked">
+        											<div class="card-content" id="representacaoDeterminante">
+        												
+        											</div>
+        										</div>
+        									</div>
+        								</div>
+        							</div>
+        						</div>
+      						</div>
+    					</div>
+  					</div>
+				</section>
 			</div>	
 		</main>
 
@@ -199,6 +264,28 @@
 		    </div>
 		    <div class="modal-footer">
 		      <a id="inserirSMatriz" class="modal-close waves-effect waves-green btn-flat">Inserir</a>
+		    </div>
+		</div>
+
+		<!-- MODAL INSERIR MATRIZ PARA SUBTRAÇÃO -->
+		<div id="modalSubtracaoMatrizes" class="modal ">
+		    <div class="modal-content">
+	      		<h4 class="titulo-modal">Inserir Matriz</h4>
+		      	<div class="row">
+					<div class="input-field col m6">
+						<input placeholder="Digite o número de linhas da matriz" id="Sublinhas" type="text" class="validate">
+						<label for="Sublinhas">Linhas:</label>
+					</div>
+					<div class="input-field col m6">
+						<input placeholder="Digite o número de colunas da matriz" id="Subcolunas" type="text" class="validate">
+						<label for="Subcolunas">Colunas:</label>
+					</div>
+				</div>
+				<div class="formSubMatriz" align="center">
+				</div>
+		    </div>
+		    <div class="modal-footer">
+		      <a id="inserirSubMatriz" class="modal-close waves-effect waves-green btn-flat">Inserir</a>
 		    </div>
 		</div>
 		  
@@ -240,8 +327,31 @@
 			</div>
 		</div>
 
+		<!-- MODAL INSERAR MATRIZ PARA DETERMINANTE -->
+		<div id="modalDeterminanteMatriz" class="modal ">
+		    <div class="modal-content">
+	      		<h4 class="titulo-modal">Inserir Matriz</h4>
+		      	<div class="row">
+					<div class="input-field col m6">
+						<input placeholder="Digite o número de linhas da matriz" id="Detlinhas" type="text" class="validate">
+						<label for="Detlinhas">Linhas:</label>
+					</div>
+					<div class="input-field col m6">
+						<input placeholder="Digite o número de colunas da matriz" id="Detcolunas" type="text" class="validate">
+						<label for="Detcolunas">Colunas:</label>
+					</div>
+				</div>
+				<div class="formDetMatriz" align="center">
+				</div>
+		    </div>
+		    <div class="modal-footer">
+		      <a id="inserirDetMatriz" class="modal-close waves-effect waves-green btn-flat">Inserir</a>
+		    </div>
+		</div>
+
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 		<script type="text/javascript" src="assets/js/materialize.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
 	</body>
 </html>
