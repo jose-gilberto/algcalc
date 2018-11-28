@@ -24,7 +24,9 @@ footer {
 }
 
 #soma,
-#multiplicacao {
+#multiplicacao,
+#subtracao,
+#determinante {
     display: none;
 }
 
