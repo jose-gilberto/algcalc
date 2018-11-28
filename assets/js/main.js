@@ -2,28 +2,46 @@ $(document).ready(function () {
 	$('.tabs').tabs();
 	$('.modal').modal();
 	$('.collapsible').collapsible();
-<<<<<<< HEAD
 	$('.sidenav').sidenav();
-=======
-        $('.sidenav').sidenav();
->>>>>>> 60cbe666448046ed3b11147b88a70e2e7a263499
+
 });
 
 $('#inicioToggle').click(function () {
 	matrizesSoma = [];
 	matrizResultante = [];
 	$('#soma').hide();
+	$('#subtracao').hide();
+	$('#determinante').hide();
 	$('#multiplicacao').hide();
 });
 
 $('#somaToggle').click(function () {
 	$('#multiplicacao').hide();
+	$('#subtracao').hide();
+	$('#determinante').hide();
 	$('#soma').show();
 });
 
 $('#multiplicacaoToggle').click(function () {
 	$('#soma').hide();
+	$('#subtracao').hide();
+	$('#determinante').hide();
 	$('#multiplicacao').show();
+});
+
+$('#subtracaoToggle').click(function () {
+	$('#subtracao').show();
+	$('#soma').hide();
+	$('#multiplicacao').hide();
+	$('#determinante').hide();
+});
+
+$('#determinanteToggle').click(function () {
+	$('#soma').hide();
+	$('#subtracao').hide();
+	$('#determinante').hide();
+	$('#multiplicacao').hide();
+	$('#determinante').show();
 });
 
 /**
@@ -189,6 +207,144 @@ function gerarRepresentacaoSoma() {
 }
 
 /**
+* -------------- SUBTRAÇÃO DE MATRIZES ------------------------
+*/
+
+let matrizesSubtracao = [];
+let dimensoesMatrizSubtracao = {};
+let resultadoSubtracao = [];
+
+$('#Subcolunas').keyup(function () {
+	dimensoesMatrizSubtracao.colunas = $(this).val();
+	gerarMatrizSubtracao();
+});
+
+$('#Sublinhas').keyup(function () {
+	dimensoesMatrizSubtracao.linhas = $(this).val();
+	gerarMatrizSubtracao();
+});
+
+$('#inserirSubMatriz').click(function () {
+	let arr = $('.campo-matriz-sub');
+	let aux = 0;
+	let novaMatriz = [];
+	for (let i = 0; i < dimensoesMatrizSubtracao.linhas; i++) {
+		let novaLinha = [];
+		for (let j = 0; j < dimensoesMatrizSubtracao.colunas; j++) {
+			novaLinha.push(arr[aux].value);
+			aux++;
+		}
+		novaMatriz.push(novaLinha);
+	}
+	matrizesSubtracao.push(novaMatriz);
+	gerarRepresentacaoSubtracao();
+});
+
+$('#calcularSubtracaoMatriz').click(function () {
+	subtracao();
+	gerarRepresentacaoSoma();
+});
+
+$('#limparSubMatriz').click(function () {
+	matrizesSubtracao = [];
+	dimensoesMatrizSubtracao = {};
+	resultadoSubtracao = [];
+	$('#Sublinhas').val('');
+	$('#Subcolunas').val('');
+	gerarRepresentacaoSubtracao();
+});
+
+function gerarMatrizSubtracao() {
+	if (!dimensoesMatrizSubtracao.linhas || !dimensoesMatrizSubtracao.colunas) {
+		return;
+	}
+
+	let formulario = '';
+
+	for (let i = 0; i < dimensoesMatrizSubtracao.linhas; i++) {
+		for (let j = 0; j < dimensoesMatrizSubtracao.colunas; j++) {
+			//console.log('a' + (i + 1) + '' + (j + 1));
+			formulario += '<div class="input-field campo-matriz-div"><input class="campo-matriz-sub" placeholder="" type="text" class="validate"></div>';
+		}
+		formulario += '<br/>';
+	}
+
+	$('.formSubMatriz').html(formulario);
+}
+
+function subtracao() {
+	let resultado = []; // Iguala a primeira matriz
+
+	for (let i = 0; i < matrizesSubtracao[0].length; i++) {
+		let novaLinha = [];
+		for (let j = 0; j < matrizesSubtracao[0][i].length; j++) {
+			novaLinha.push(matrizesSubtracao[0][i][j]);
+		}
+		resultado.push(novaLinha);
+	}
+
+	for (let n = 1; n < matrizesSubtracao.length; n++) {
+		for (let i = 0; i < dimensoesMatrizSubtracao.linhas; i++) {
+			for (let j = 0; j < dimensoesMatrizSubtracao.colunas; j++) {
+				resultado[i][j] -= matrizesSubtracao[n][i][j];
+			}
+		}
+	}
+
+	resultadoSubtracao = resultado;
+	gerarRepresentacaoSubtracao();
+}
+
+function gerarRepresentacaoSubtracao() {
+	if (matrizesSubtracao.length == 0) {
+		$('#representacaoSubtracao').html('');
+	} else {
+		let representacao = '$$ ';
+		for (let n = 0; n < matrizesSubtracao.length; n++) {
+			if (n > 0) {
+				representacao += ' - ';
+			}
+			representacao += '\\begin{pmatrix}';
+			for (let i = 0; i < matrizesSubtracao[n].length; i++) {
+				for (let j = 0; j < matrizesSubtracao[n][1].length; j++) {
+					representacao += matrizesSubtracao[n][i][j];
+					if (j != matrizesSubtracao[n][1].length - 1) {
+						representacao += ' & ';
+					}
+				}
+				if (i != matrizesSubtracao[n].length - 1) {
+					representacao += ' \\\\';
+				}
+			}
+			representacao += '\\end{pmatrix}';
+			if (n == matrizesSubtracao.length - 1) {
+				representacao += '=';
+			}
+		}
+		if (resultadoSubtracao.length > 0) {
+			representacao += '\\begin{pmatrix}';
+			for (let i = 0; i < dimensoesMatrizSubtracao.linhas; i++) {
+				for (let j = 0; j < dimensoesMatrizSubtracao.colunas; j++) {
+					representacao += resultadoSubtracao[i][j];
+					if (j != resultadoSubtracao[1].length - 1) {
+						representacao += ' & ';
+					}
+				}
+				if (i != resultadoSubtracao.length - 1) {
+					representacao += ' \\\\';
+				}
+			}
+			representacao += '\\end{pmatrix}';
+		}
+
+		representacao += ' $$';
+		resultadoSubtracao = [];
+		$('#representacaoSubtracao').html(representacao);
+		MathJax.Hub.Queue(["Typeset", MathJax.Hub, "representacaoSubtracao"]);
+	}
+}
+
+/**
 * -------------- MULTIPLICAÇÃO MATRIZ-ESCALAR --------------------
 */
 
@@ -326,6 +482,133 @@ function gerarRepresentacaoMultiplicacaoEscalar() {
 	MathJax.Hub.Queue(["Typeset", MathJax.Hub, "representacao-escalar"]);
 }
 
+/**
+* -------------- MULTIPLICAÇÃO ENTRE MATRIZES -------------
+*/
+
+function multiplicarMatrizes(matrizA = [], matrizB = []) {
+	if (matrizA[0].length != matrizB.length) {
+		toastr.warning('O número de colunas da primeira matriz deve ser igual ao número de linhas da segunda matriz');
+	} else {
+		let sum = 0;
+		let resultado = [];
+
+		for (let i = 0; i < matrizA.length; i++) {
+			let novaLinha = [];
+			for (let j = 0; j < matrizB.length; j++) {
+				novaLinha.push(0);
+			}
+			resultado.push(novaLinha);
+		}
+
+		for (let i = 0; i < matrizA.length; i++) {
+			for (let j = 0; j < matrizB[0].length; j++) {
+				for (let p = 0; p < matrizB.length; p++) {
+					sum += matrizA[i][p] * matrizB[p][j];
+				}
+				resultado[i][j] = sum;
+				sum = 0;
+			}
+		}
+
+		return resultado;
+	}
+}
+
+/**
+*	------------ DETERMINANTE DE MATRIZES -------------
+*/
+
+let matrizDeterminante = [];
+let dimensoesMatrizDet = {};
+let determinante = null;
+
+$('#Detcolunas').keyup(function () {
+	dimensoesMatrizDet.colunas = $(this).val();
+	gerarMatrizDeterminante();
+});
+
+$('#Detlinhas').keyup(function () {
+	dimensoesMatrizDet.linhas = $(this).val();
+	gerarMatrizDeterminante();
+});
+
+function gerarMatrizDeterminante() {
+	if (!dimensoesMatrizDet.linhas || !dimensoesMatrizDet.colunas) {
+		return;
+	}
+
+	let formulario = '';
+
+	for (let i = 0; i < dimensoesMatrizDet.linhas; i++) {
+		for (let j = 0; j < dimensoesMatrizDet.colunas; j++) {
+			formulario += '<div class="input-field campo-matriz-div"><input class="campo-matriz-det" placeholder="" type="text" class="validate"></div>';
+		}
+		formulario += '<br/>';
+	}
+
+	$('.formDetMatriz').html(formulario);
+}
+
+$('#inserirDetMatriz').click(function () {
+	let arr = $('.campo-matriz-det');
+	let aux = 0;
+	let novaMatriz = [];
+	for (let i = 0; i < dimensoesMatrizDet.linhas; i++) {
+		let novaLinha = [];
+		for (let j = 0; j < dimensoesMatrizDet.colunas; j++) {
+			novaLinha.push(arr[aux].value);
+			aux++;
+		}
+		novaMatriz.push(novaLinha);
+	}
+	matrizDeterminante = novaMatriz;
+	gerarRepresentacaoDeterminante();
+});
+
+$('#calcularDeterminanteMatriz').click(function () {
+	determinante = laplace(matrizDeterminante);
+	gerarRepresentacaoDeterminante();
+});
+
+$('#limpartDetMatriz').click(function () {
+	matrizDeterminante = [];
+	dimensoesMatrizDet = {};
+	determinante = null;
+	gerarRepresentacaoDeterminante();
+});
+
+function gerarRepresentacaoDeterminante() {
+	let representacao = '$$ ';
+	if (matrizDeterminante.length) {
+		representacao += 'det(';
+		representacao += '\\begin{pmatrix}';
+		for (let i = 0; i < matrizDeterminante.length; i++) {
+			for (let j = 0; j < matrizDeterminante[1].length; j++) {
+				representacao += matrizDeterminante[i][j];
+				if (j != matrizDeterminante[1].length - 1) {
+					representacao += ' & ';
+				}
+			}
+			if (i != matrizDeterminante.length - 1) {
+				representacao += ' \\\\';
+			}
+		}
+
+		representacao += '\\end{pmatrix}) = ';
+
+		if (determinante != null) {
+			representacao += determinante;
+		}
+	}
+	representacao += ' $$';
+	$('#representacaoDeterminante').html(representacao);
+	MathJax.Hub.Queue(["Typeset", MathJax.Hub, "representacaoDeterminante"]);
+}
+
+
+//$('').click(function () {});
+
 /*
 * @function ordem()
 * params - matriz - recebe uma matriz quadrada
@@ -378,18 +661,6 @@ function cofator(matriz, linha, coluna) {
 	return (coluna % 2 ? -1 : 1) * laplace(subMatriz);
 }
 
-function soma() {
-
-}
-
-function multiplicacaoMatrizes() {
-
-}
-
-function multiplicacaoEscalar() {
-
-}
-
 function LU() {
 
 }
@@ -417,7 +688,13 @@ A = [1 1] remove [i][0]
     [2 2]
 */
 
+B = [[1, 0],
+[0, 2]]
 
+C = [[0, 1],
+[1, 0]]
+
+console.log(multiplicarMatrizes(B, C));
 
 
 
