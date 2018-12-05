@@ -3,12 +3,9 @@ $(document).ready(function () {
 	$('.modal').modal();
 	$('.collapsible').collapsible();
 	$('.sidenav').sidenav();
-
 });
 
 $('#inicioToggle').click(function () {
-	matrizesSoma = [];
-	matrizResultante = [];
 	$('#soma').hide();
 	$('#subtracao').hide();
 	$('#determinante').hide();
@@ -67,15 +64,19 @@ function zerarVariaveisSoma() {
  * Desabilita os campos colunas e linhas caso já haja uma matriz inserida
  */
 $('#inserirMatrizSoma').click(function () {
-	if (matrizSoma.linhas) {
-		$('#Slinhas').prop('disabled', true);
-	} else {
-		$('#Slinhas').prop('disabled', false);
-	}
-	if (matrizSoma.colunas) {
-		$('#Scolunas').prop('disabled', true);
-	} else {
-		$('#Scolunas').prop('disabled', false);
+	if (matrizesSoma.length > 0) {
+		if (matrizSoma.linhas) {
+			$('#Slinhas').prop('disabled', true);
+		} else {
+			$('#Slinhas').prop('disabled', false);
+		}
+
+		if (matrizSoma.colunas) {
+			$('#Scolunas').prop('disabled', true);
+		} else {
+			$('#Scolunas').prop('disabled', false);
+		}
+		$('.campo-matriz').val(' ');
 	}
 });
 
@@ -213,6 +214,23 @@ function gerarRepresentacaoSoma() {
 let matrizesSubtracao = [];
 let dimensoesMatrizSubtracao = {};
 let resultadoSubtracao = [];
+
+$('#inserirMatrizSubtracao').click(function () {
+	if (matrizesSubtracao.length > 0) {
+		if (dimensoesMatrizSubtracao.linhas) {
+			$('#Sublinhas').prop('disabled', true);
+		} else {
+			$('#Sublinhas').prop('disabled', false);
+		}
+
+		if (dimensoesMatrizSubtracao.colunas) {
+			$('#Subcolunas').prop('disabled', true);
+		} else {
+			$('#Subcolunas').prop('disabled', false);
+		}
+		$('.campo-matriz-sub').val('');
+	}
+});
 
 $('#Subcolunas').keyup(function () {
 	dimensoesMatrizSubtracao.colunas = $(this).val();
@@ -359,6 +377,7 @@ $('#calcular-escalar').click(function () {
 
 $('#inserirEscalarM').click(function () {
 	escalar = $('#EscalarM').val();
+	$('#modalInserirEscalar').hide();
 	gerarRepresentacaoMultiplicacaoEscalar();
 });
 
@@ -367,6 +386,14 @@ $('#limparME').click(function () {
 	resultadoME = [];
 	escalar = undefined;
 	matrizME = [];
+	$('#modalInserirEscalar').show();
+	$('#modalInserirMatrizME').show();
+
+	$('#EscalarM').val('');
+	$('.campo-matriz-me').val('');
+	$('#MEcolunas').val('');
+	$('#MElinhas').val('');
+
 	gerarRepresentacaoMultiplicacaoEscalar();
 });
 
